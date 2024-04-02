@@ -1,0 +1,18 @@
+This is just a test project, there are many places that could be improved as some examples:
+
+- better UX
+	- make a custom video player, so you can hide the original video player (as fabric example does)
+
+- database could "INSERT INTO" async/thread
+
+- make some tests
+
+- make a docker image of postgres (or just use a cloud solution instead)
+
+- image compression before sending to backend
+
+- sanatize and cryptography inputs send to backend
+
+- saniteze input received on backend
+
+- the application is very heavy on both side (most on server) (maybe not accomplishable)

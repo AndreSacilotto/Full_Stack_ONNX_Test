@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  ai_model:
+    build: ./ai_model
+    container_name: ai_model_c
+    ports:
+      - '5000:5000'
+  frontend:
+    build: ./frontend
+    container_name: frontend_c
+    ports:
+      - '8000:8000'
+    stdin_open: true

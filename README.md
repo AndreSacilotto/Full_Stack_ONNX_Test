@@ -15,21 +15,28 @@ On the backend, each inference result should be saved to a PostgreSQL database. 
 
 ## Architecture
 
-- **Backend:** Python 3.8 + Flask (for the AI model's predictions) + ONNX
-- **Frontend:** React + Fabric.js + Typescript + any UI framework
+- **Backend:** Python >=3.8 + Flask (for the AI model's predictions) + ONNX
+- **Frontend:** React + Fabric.js + Typescript + (tailwind & daisyui)
 - **Database:** PostgreSQL (to store user inputs and model predictions)
 
 ## API Endpoints
 
+#### Ping:
+- Endpoint: `/ping`
+- Method: GET
+- Description: returns pong. Usefull to see if the server rest api is operational.
+
 #### Detect Objects:
 - Endpoint: `/detect`
 - Method: POST
-- Description: Receives an image path, confidence threshold, and IoU threshold and returns the detection results.
+- Description: Receive a json that represent a request for image analyze, returns the detection results and store it on the database.
 
 - **Example 1:**
 	- request:
 	```json
 	{
+		"file_time": -1,
+		"file_name": "bus.png",
 		"image_info": "/app/test/bus.jpg",
 		"confidence": 0.7,
 		"iou": 0.5,
@@ -65,6 +72,8 @@ On the backend, each inference result should be saved to a PostgreSQL database. 
 	- request:
 	```json
 	{
+		"file_time": 0,
+		"file_name": "demo.jpg",
 		"image_info": "https://storage.googleapis.com/sfr-vision-language-research/BLIP/demo.jpg",
 		"confidence": 0.7,
 		"iou": 0.5,
@@ -88,7 +97,7 @@ On the backend, each inference result should be saved to a PostgreSQL database. 
 	```
 
 #### Health Check:
-  - Endpoint: `/health_check`
+  - Endpoint: `/model_check`
   - Method: GET
   - Description: Checks if the model is loaded and returns the status.
 
@@ -96,3 +105,8 @@ On the backend, each inference result should be saved to a PostgreSQL database. 
   - Endpoint: `/load_model`
   - Method: POST
   - Description: Loads a specified `model_name` for object detection. One of `yolov8n` (nano: faster, less accurate) or `yolov8s` (small: a bit slower and more accurate).
+
+#### Models List:
+  - Endpoint: `/models_list`
+  - Method: GET
+  - Return an array of strings contening all avaliable models.
